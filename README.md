@@ -1,26 +1,14 @@
-# Illegal-Fishing-Detection
-This repository contains code for a machine learning model trained to classify fishing activity based on vessel data collected from the Global Fishing Watch. The model uses the various algorithm for classification and achieves an highest accuracy of 99.78% on the training data.
-## Prerequisites
-Make sure you have the following libraries installed:
+# d-star-lite
 
-* pandas
-* scikit-learn
-* xgboost
-* joblib
-## Data Collection
-The data used for training and testing the model is obtained from the Global Fishing Watch website(https://globalfishingwatch.org/data-download/datasets/public-training-data-v1). The dataset is in CSV format and contains information about vessel activities such as speed over ground, distance from shore, distance from port, time elapsed, latitude, longitude, and source.
-## Data Pre-processing
-The AIS (Automatic Identification System) data is pre-processed to clean and transform it into a suitable format for training the model. The pre-processing steps include:
+This poject is based on the original [D* Lite paper](http://idm-lab.org/bib/abstracts/papers/aaai02b.pdf) by Sven Koenig and Maxim Likhachev.
 
-* Dropping rows with missing values
-* Converting the timestamp to a datetime object
-* Creating additional features like 'speed_over_ground', 'distance_from_shore', 'distance_from_port', 'time_elapsed', 'lat', 'lon', and 'activity'
-* Labeling the 'activity' column based on the 'is_fishing' column
-* Saving the pre-processed data to a CSV file named "Final_data.csv"
+The D* Lite algorithm was written to be a "novel fast replanning method for robot navigation in unknown terrain". It searches "from the goal vertex towards the current vertex of the robot, uses heuristics to focus the search" and efficiently uses the priortity queue to minimize reordering.
 
-## Model Training
-The pre-processed data is split into training and testing datasets using the train_test_split function from scikit-learn. The features ('speed_over_ground', 'distance_from_shore', 'distance_from_port', 'time_elapsed', 'lat', 'lon') are scaled using the StandardScaler to normalize the data. The Random Forest classifier,Xgboost,Knn,Navie Bayes from scikit-learn is then  trained on the scaled training data. The trained model is saved to a file named "randomforest_model(9978).sav".
-## Model Evaluation
-The trained model is evaluated on the testing dataset by making predictions on the scaled testing features. The accuracy of the model is calculated using the accuracy_score function from scikit-learn and printed to the console. The training accuracy is also calculated and displayed.
-## Model Testing
-To test the trained model on new data, a separate dataset named "trollers.csv" is pre-processed following the same steps as for the training data. The pre-processed data is saved to a file named "test_data.csv". The saved Random Forest model is loaded using the joblib.load function from the joblib library. A sample vessel data is created, and the loaded model is used to predict the activity based on the vessel data. The prediction result is printed to the console.
+### Use of the project
+Currently written for Python 3 and the biggest requirement is having Pygame. Instructions for installing pygame can be found at [https://www.pygame.org/wiki/GettingStarted](https://www.pygame.org/wiki/GettingStarted).
+
+Run the example demo with ```python3 main.py``` (or ```python main.py``` if you have Python 3 installed as such on your system or in your environment). The demo shows off the dynamic replanning ability of the path planning algorithm by allowing the user to add obstacles by clicking on cells in the grid. Our mobile agent is the red circle, while the goal cell is green. The agent has a visibility range, shown by the thin black lines, and added obstacles are not taken into account by the agent until they are visible and change to darker grey. Pressing space bar makes the agent observe new obstacles, replan if necessary, and advances on the current best path until the goal is reached.
+
+More notes to come on how the code is organized... 
+
+Feel free to add more specific questions about the project in comments on issue #1, so that I can add better documentation.
